@@ -21,8 +21,8 @@ public class RowView extends LinearLayout implements View.OnClickListener {
     private ImageView mWidgetRowIconImg;
     private TextView mWidgetRowLabel;
     private ImageView mWidgetRowActionImg;
-    private RowActionEnum action;
     private OnRowChangeListener listener;
+    private RowDescriptor descriptor;
 
     public RowView(Context context) {
         super(context);
@@ -48,43 +48,63 @@ public class RowView extends LinearLayout implements View.OnClickListener {
     private void initView() {
 
         LayoutInflater.from(context).inflate(R.layout.widget_general_row,this);
-
         mWidgetRowIconImg=(ImageView)findViewById(R.id.mWidgetRowIconImg);
         mWidgetRowLabel=(TextView)findViewById(R.id.mWidgetRowLabel);
         mWidgetRowActionImg=(ImageView)findViewById(R.id.mWidgetRowActionImg);
 
-
+//        setOnClickListener(this);
     }
 
     public void initData(int iconResId, String name, RowActionEnum action,OnRowChangeListener listener)
     {
-        this.action=action;
-        this.listener=listener;
-        mWidgetRowIconImg.setBackgroundResource(iconResId);
-        mWidgetRowLabel.setText(name);
-        mWidgetRowActionImg.setImageResource(R.mipmap.ic_row_forward);
-        if (action!=null)
-        {
-            mWidgetRowActionImg.setOnClickListener(this);
-            mWidgetRowActionImg.setVisibility(View.VISIBLE);
-            setBackgroundResource(R.drawable.widgets_general_row_selector);
-        }else
-        {
-            setBackgroundColor(Color.WHITE);
-            mWidgetRowActionImg.setVisibility(View.GONE);
-        }
+//        this.action=action;
+//        this.listener=listener;
+//        mWidgetRowIconImg.setBackgroundResource(iconResId);
+//        mWidgetRowLabel.setText(name);
+//        mWidgetRowActionImg.setImageResource(R.mipmap.ic_row_forward);
+//        if (action!=null)
+//        {
+//            setOnClickListener(this);
+//            mWidgetRowActionImg.setVisibility(View.VISIBLE);
+//            setBackgroundResource(R.drawable.widgets_general_row_selector);
+//        }else
+//        {
+//            setBackgroundColor(Color.WHITE);
+//            mWidgetRowActionImg.setVisibility(View.GONE);
+//        }
+
     }
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId())
-//        {
-//            case R.id.mWidgetRowActionImg:
-//                Toast.makeText(context,action.name(),Toast.LENGTH_LONG).show();
-//                break;
-//        }
         if (listener!=null)
-            listener.onRowChangee(action);
+            listener.onRowChanged(descriptor.action);
 
+    }
+
+    public void initData(RowDescriptor descriptor,OnRowChangeListener listener) {
+        this.descriptor=descriptor;
+        this.listener=listener;
+    }
+
+    public void notifyDataChanged() {
+        if (descriptor!=null)
+        {
+            setVisibility(View.VISIBLE);
+            mWidgetRowIconImg.setBackgroundResource(descriptor.iconResId);
+            mWidgetRowLabel.setText(descriptor.label);
+            mWidgetRowActionImg.setImageResource(R.mipmap.ic_row_forward);
+            if (descriptor.action!=null)
+            {
+                setOnClickListener(this);
+                mWidgetRowActionImg.setVisibility(View.VISIBLE);
+                setBackgroundResource(R.drawable.widgets_general_row_selector);
+            }else
+            {
+                setBackgroundColor(Color.WHITE);
+                mWidgetRowActionImg.setVisibility(View.GONE);
+            }
+        }else
+            setVisibility(View.GONE);
     }
 }

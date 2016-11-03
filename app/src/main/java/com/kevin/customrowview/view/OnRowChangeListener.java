@@ -5,5 +5,5 @@ package com.kevin.customrowview.view;
  */
 
 public interface OnRowChangeListener {
-    void onRowChangee(RowActionEnum action);
+    void onRowChanged(RowActionEnum action);
 }

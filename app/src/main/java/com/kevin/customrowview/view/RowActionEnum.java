@@ -5,5 +5,5 @@ package com.kevin.customrowview.view;
  */
 
 public enum  RowActionEnum {
-    MY_POSTS
+    MY_POSTS,TOGGLE_OFF,TOGGLE_ON
 }
