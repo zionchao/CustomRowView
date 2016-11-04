@@ -55,8 +55,8 @@ public class RowView extends LinearLayout implements View.OnClickListener {
 //        setOnClickListener(this);
     }
 
-    public void initData(int iconResId, String name, RowActionEnum action,OnRowChangeListener listener)
-    {
+//    public void initData(int iconResId, String name, RowActionEnum action,OnRowChangeListener listener)
+//    {
 //        this.action=action;
 //        this.listener=listener;
 //        mWidgetRowIconImg.setBackgroundResource(iconResId);
@@ -72,8 +72,8 @@ public class RowView extends LinearLayout implements View.OnClickListener {
 //            setBackgroundColor(Color.WHITE);
 //            mWidgetRowActionImg.setVisibility(View.GONE);
 //        }
-
-    }
+//
+//    }
 
     @Override
     public void onClick(View v) {

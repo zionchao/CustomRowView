@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.kevin.customrowview.view.GroupView;
+import com.kevin.customrowview.view.ContainerView;
+import com.kevin.customrowview.view.GroupDescriptor;
 import com.kevin.customrowview.view.OnRowChangeListener;
 import com.kevin.customrowview.view.RowActionEnum;
 import com.kevin.customrowview.view.RowDescriptor;
@@ -13,21 +14,26 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity implements OnRowChangeListener {
 
-    private GroupView mWidgetGroupView;
+    private ContainerView mWidgetContainerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mWidgetGroupView=(GroupView)findViewById(R.id.mWidgetGroupView);
+        mWidgetContainerView=(ContainerView)findViewById(R.id.mWidgetContainerView);
+
+        ArrayList<GroupDescriptor> groupDescriptors=new ArrayList<>();
 
         ArrayList<RowDescriptor> descriptors=new ArrayList<>();
         descriptors.add(new RowDescriptor(R.drawable.ic_row_value_required,"My Posts", RowActionEnum.MY_POSTS));
         descriptors.add(new RowDescriptor(R.drawable.ic_toggle_off,"Toggle off", RowActionEnum.TOGGLE_OFF));
         descriptors.add(new RowDescriptor(R.drawable.ic_toggle_on,"Toggle on", RowActionEnum.TOGGLE_ON));
 
-        mWidgetGroupView.initData(descriptors,this);
-        mWidgetGroupView.notifyDataChanged();
+        GroupDescriptor group=new GroupDescriptor(descriptors);
+        groupDescriptors.add(group);
+        mWidgetContainerView.initData(groupDescriptors,this);
+
+        mWidgetContainerView.notifyDataChanged();
     }
 
     @Override

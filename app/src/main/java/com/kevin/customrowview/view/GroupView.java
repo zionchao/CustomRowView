@@ -2,9 +2,7 @@ package com.kevin.customrowview.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.kevin.customrowview.R;
@@ -20,6 +18,7 @@ public class GroupView extends LinearLayout {
     private ArrayList<RowDescriptor> descriptors;
     private Context context;
     private OnRowChangeListener listener;
+    private String title;
 
     public GroupView(Context context) {
         super(context);
@@ -43,19 +42,23 @@ public class GroupView extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    public void initData(ArrayList<RowDescriptor> descriptors,OnRowChangeListener listener){
-        this.descriptors=descriptors;
+    public void initData(GroupDescriptor descriptors,OnRowChangeListener listener){
+        this.descriptors=descriptors.descriptors;
+//        this.title=descriptors.title;
         this.listener=listener;
     }
 
     public void notifyDataChanged()
     {
+        removeAllViews();
         if (descriptors!=null&&descriptors.size()>0)
         {
             RowView row=null;
             View line=null;
-            LayoutParams params=new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1);
-            params.leftMargin=10;
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,5);
+            float density=context.getResources().getDisplayMetrics().density;
+            params.leftMargin=(int)(10*density);
+
             for (int i=0;i<descriptors.size();i++)
             {
                 row=new RowView(context);
@@ -66,9 +69,12 @@ public class GroupView extends LinearLayout {
                 {
                     line =new View(context);
                     line.setBackgroundResource(R.color.widgets_general_row_line);
+                    line.setLayoutParams(params);
                     addView(line,params);
                 }
             }
+            setVisibility(View.VISIBLE);
+
         }else
         {
             setVisibility(View.GONE);

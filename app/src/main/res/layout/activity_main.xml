@@ -7,11 +7,10 @@
     android:background="@color/general_background"
     android:orientation="vertical"
     >
-    <com.kevin.customrowview.view.GroupView
+    <com.kevin.customrowview.view.ContainerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mWidgetGroupView"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
+        android:id="@+id/mWidgetContainerView"
         />
 
 </LinearLayout>
