@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kevin.customrowview.R;
@@ -15,22 +14,22 @@ import com.kevin.customrowview.R;
  * Created by zhangchao_a on 2016/11/3.
  */
 
-public class RowView extends LinearLayout implements View.OnClickListener {
+public class ProfileRowView extends BaseRowView implements View.OnClickListener {
 
     private final Context context;
     private ImageView mWidgetRowIconImg;
     private TextView mWidgetRowLabel;
     private ImageView mWidgetRowActionImg;
     private OnRowChangeListener listener;
-    private RowDescriptor descriptor;
+    private RowProfileDescriptor descriptor;
 
-    public RowView(Context context) {
+    public ProfileRowView(Context context) {
         super(context);
         this.context=context;
         initView();
     }
 
-    public RowView(Context context, AttributeSet attrs) {
+    public ProfileRowView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
         initView();
@@ -38,7 +37,7 @@ public class RowView extends LinearLayout implements View.OnClickListener {
 
     }
 
-    public RowView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ProfileRowView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context=context;
         initView();
@@ -47,7 +46,7 @@ public class RowView extends LinearLayout implements View.OnClickListener {
 
     private void initView() {
 
-        LayoutInflater.from(context).inflate(R.layout.widget_general_row,this);
+        LayoutInflater.from(context).inflate(R.layout.widget_profile_row,this);
         mWidgetRowIconImg=(ImageView)findViewById(R.id.mWidgetRowIconImg);
         mWidgetRowLabel=(TextView)findViewById(R.id.mWidgetRowLabel);
         mWidgetRowActionImg=(ImageView)findViewById(R.id.mWidgetRowActionImg);
@@ -82,29 +81,29 @@ public class RowView extends LinearLayout implements View.OnClickListener {
 
     }
 
-    public void initData(RowDescriptor descriptor,OnRowChangeListener listener) {
-        this.descriptor=descriptor;
+    public void initData(BaseRowDescriptor descriptor,OnRowChangeListener listener) {
+        this.descriptor=(RowProfileDescriptor)descriptor;
         this.listener=listener;
     }
 
     public void notifyDataChanged() {
-        if (descriptor!=null)
-        {
-            setVisibility(View.VISIBLE);
-            mWidgetRowIconImg.setBackgroundResource(descriptor.iconResId);
-            mWidgetRowLabel.setText(descriptor.label);
-            mWidgetRowActionImg.setImageResource(R.mipmap.ic_row_forward);
-            if (descriptor.action!=null)
-            {
-                setOnClickListener(this);
-                mWidgetRowActionImg.setVisibility(View.VISIBLE);
-                setBackgroundResource(R.drawable.widgets_general_row_selector);
-            }else
-            {
-                setBackgroundColor(Color.WHITE);
-                mWidgetRowActionImg.setVisibility(View.GONE);
-            }
-        }else
-            setVisibility(View.GONE);
+//        if (descriptor!=null)
+//        {
+//            setVisibility(View.VISIBLE);
+//            mWidgetRowIconImg.setBackgroundResource(descriptor.iconResId);
+//            mWidgetRowLabel.setText(descriptor.label);
+//            mWidgetRowActionImg.setImageResource(R.mipmap.ic_row_forward);
+//            if (descriptor.action!=null)
+//            {
+//                setOnClickListener(this);
+//                mWidgetRowActionImg.setVisibility(View.VISIBLE);
+//                setBackgroundResource(R.drawable.widgets_general_row_selector);
+//            }else
+//            {
+//                setBackgroundColor(Color.WHITE);
+//                mWidgetRowActionImg.setVisibility(View.GONE);
+//            }
+//        }else
+//            setVisibility(View.GONE);
     }
 }

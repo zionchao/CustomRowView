@@ -66,7 +66,6 @@ public class ContainerView extends LinearLayout {
         }else
         {
             setVisibility(View.GONE);
-
         }
     }
 }

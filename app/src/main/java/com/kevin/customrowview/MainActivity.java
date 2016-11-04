@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.kevin.customrowview.view.BaseRowDescriptor;
 import com.kevin.customrowview.view.ContainerView;
 import com.kevin.customrowview.view.GroupDescriptor;
 import com.kevin.customrowview.view.OnRowChangeListener;
 import com.kevin.customrowview.view.RowActionEnum;
-import com.kevin.customrowview.view.RowDescriptor;
+import com.kevin.customrowview.view.RowNormalDescriptor;
 
 import java.util.ArrayList;
 
@@ -24,10 +25,10 @@ public class MainActivity extends Activity implements OnRowChangeListener {
 
         ArrayList<GroupDescriptor> groupDescriptors=new ArrayList<>();
 
-        ArrayList<RowDescriptor> descriptors=new ArrayList<>();
-        descriptors.add(new RowDescriptor(R.drawable.ic_row_value_required,"My Posts", RowActionEnum.MY_POSTS));
-        descriptors.add(new RowDescriptor(R.drawable.ic_toggle_off,"Toggle off", RowActionEnum.TOGGLE_OFF));
-        descriptors.add(new RowDescriptor(R.drawable.ic_toggle_on,"Toggle on", RowActionEnum.TOGGLE_ON));
+        ArrayList<BaseRowDescriptor> descriptors=new ArrayList<>();
+        descriptors.add(new RowNormalDescriptor(R.drawable.ic_row_value_required,"My Posts", RowActionEnum.MY_POSTS));
+        descriptors.add(new RowNormalDescriptor(R.drawable.ic_toggle_off,"Toggle off", RowActionEnum.TOGGLE_OFF));
+        descriptors.add(new RowNormalDescriptor(R.drawable.ic_toggle_on,"Toggle on", RowActionEnum.TOGGLE_ON));
 
         GroupDescriptor group=new GroupDescriptor(descriptors);
         groupDescriptors.add(group);

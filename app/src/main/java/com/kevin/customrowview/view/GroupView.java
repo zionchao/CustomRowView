@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class GroupView extends LinearLayout {
 
-    private ArrayList<RowDescriptor> descriptors;
+    private ArrayList<BaseRowDescriptor> descriptors;
     private Context context;
     private OnRowChangeListener listener;
     private String title;
@@ -53,18 +53,26 @@ public class GroupView extends LinearLayout {
         removeAllViews();
         if (descriptors!=null&&descriptors.size()>0)
         {
-            RowView row=null;
+            BaseRowView row=null;
             View line=null;
             LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,5);
             float density=context.getResources().getDisplayMetrics().density;
             params.leftMargin=(int)(10*density);
 
+            BaseRowDescriptor descriptor;
             for (int i=0;i<descriptors.size();i++)
             {
-                row=new RowView(context);
-                row.initData(descriptors.get(i),listener);
+                descriptor=descriptors.get(i);
+                if (descriptor instanceof RowNormalDescriptor)
+                {
+                    row=new NormalRowView(context);
+                }else if (descriptor instanceof RowProfileDescriptor){
+                    row=new ProfileRowView(context);
+                }
+                row.initData( descriptor,listener);
                 row.notifyDataChanged();
                 addView(row);
+
                 if (i!=descriptors.size()-1)
                 {
                     line =new View(context);

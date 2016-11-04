@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class GroupDescriptor {
 
     public String title;
-    public ArrayList<RowDescriptor> descriptors;
+    public ArrayList<BaseRowDescriptor> descriptors;
 
-    public GroupDescriptor( ArrayList<RowDescriptor> rowDescriptors) {
+    public GroupDescriptor( ArrayList<BaseRowDescriptor> rowDescriptors) {
         this.descriptors = rowDescriptors;
     }
 
-    public GroupDescriptor(String title, ArrayList<RowDescriptor> rowDescriptors) {
+    public GroupDescriptor(String title, ArrayList<BaseRowDescriptor> rowDescriptors) {
         this.title = title;
         this.descriptors = rowDescriptors;
     }
